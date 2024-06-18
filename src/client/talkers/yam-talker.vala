@@ -83,7 +83,7 @@ namespace Cassette.Client {
 
             if (me != null) {
                 if (!me.has_plus) {
-                    throw new CantUseError.NO_PLUS ("No Plus Subscription");
+                    //  throw new CantUseError.NO_PLUS ("No Plus Subscription");
                 }
             }
         }

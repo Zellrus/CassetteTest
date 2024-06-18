@@ -127,9 +127,8 @@ namespace Cassette {
                     should_auth = true;
 
                 } catch (CantUseError e) {
-                    Logger.warning ("User hasn't Plus Subscription. Error message: %s".printf (e.message));
-
-                    cant_use = true;
+                    
+                    cant_use = false;
                 }
 
                 Idle.add (init_client_async.callback);

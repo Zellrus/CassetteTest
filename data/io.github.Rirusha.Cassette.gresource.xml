@@ -151,11 +151,12 @@
     <file preprocess="xml-stripblanks">ui/info-marks.ui</file>
     <file preprocess="xml-stripblanks">ui/job-info-badge.ui</file>
     <file preprocess="xml-stripblanks">ui/label-button.ui</file>
+    <file preprocess="xml-stripblanks">ui/loadable-widget.ui</file>
     <file preprocess="xml-stripblanks">ui/lyrics-line.ui</file>
     <file preprocess="xml-stripblanks">ui/lyrics-panel.ui</file>
     <file preprocess="xml-stripblanks">ui/main-view.ui</file>
-    <file preprocess="xml-stripblanks">ui/window.ui</file>
     <file preprocess="xml-stripblanks">ui/menu-dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/narrow-toggle-button.ui</file>
     <file preprocess="xml-stripblanks">ui/no-plus-dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/player-bar.ui</file>
     <file preprocess="xml-stripblanks">ui/player-queue.ui</file>
@@ -170,6 +171,7 @@
     <file preprocess="xml-stripblanks">ui/save-stack.ui</file>
     <file preprocess="xml-stripblanks">ui/sidebar.ui</file>
     <file preprocess="xml-stripblanks">ui/stations-view.ui</file>
+    <file preprocess="xml-stripblanks">ui/track-base-content.ui</file>
     <file preprocess="xml-stripblanks">ui/track-carousel.ui</file>
     <file preprocess="xml-stripblanks">ui/track-default-content.ui</file>
     <file preprocess="xml-stripblanks">ui/track-info.ui</file>
@@ -179,5 +181,7 @@
     <file preprocess="xml-stripblanks">ui/track-placeholder.ui</file>
     <file preprocess="xml-stripblanks">ui/track-queue-content.ui</file>
     <file preprocess="xml-stripblanks">ui/volume-button.ui</file>
+    <file preprocess="xml-stripblanks">ui/wave-settings.ui</file>
+    <file preprocess="xml-stripblanks">ui/window.ui</file>
   </gresource>
 </gresources>

@@ -15,11 +15,15 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-public abstract class Cassette.SidebarChildBin : Adw.Bin {
+public abstract class Cassette.SidebarChildBin: Adw.Bin {
 
     public string child_id { get; set; }
 
     public string title { get; set; }
 
     public string subtitle { get; set; }
+
+    static construct {
+        set_css_name ("sidebar-child-bin");
+    }
 }

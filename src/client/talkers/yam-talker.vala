@@ -586,17 +586,24 @@ namespace Cassette.Client {
             return new_playlist;
         }
 
-        public Playlist? remove_tracks_from_playlist (string kind, int position, int revision) {
+        public async Playlist? remove_tracks_from_playlist (string kind, int position, int revision) {
             Playlist? new_playlist = null;
 
             var diff = new DifferenceBuilder ();
 
             diff.add_delete (position, position + 1);
 
-            net_run_wout_code (() => {
-                new_playlist = client.users_playlists_change (null, kind, diff.to_json (), revision);
-                playlist_changed (new_playlist);
+            threader.add (() => {
+                net_run_wout_code (() => {
+                    new_playlist = client.users_playlists_change (null, kind, diff.to_json (), revision);
+                });
+
+                Idle.add (remove_tracks_from_playlist.callback);
             });
+
+            yield;
+
+            playlist_changed (new_playlist);
 
             return new_playlist;
         }
@@ -770,6 +777,52 @@ namespace Cassette.Client {
             yield;
 
             return stations_list;
+        }
+
+        public async Rotor.Settings? get_wave_settings () {
+            Rotor.Settings? wave_settings = null;
+
+            threader.add (() => {
+                net_run_wout_code (() => {
+                    wave_settings = client.rotor_wave_settings ();
+                });
+
+                Idle.add (get_wave_settings.callback);
+            });
+
+            yield;
+
+            return wave_settings;
+        }
+
+        public async Rotor.Wave? get_last_wave () {
+            Rotor.Wave? last_wave = null;
+
+            threader.add (() => {
+                net_run_wout_code (() => {
+                    last_wave = client.rotor_wave_last ();
+                });
+
+                Idle.add (get_last_wave.callback);
+            });
+
+            yield;
+
+            return last_wave;
+        }
+
+        public async void reset_last_wave () {
+            bool is_success = false;
+
+            threader.add (() => {
+                net_run_wout_code (() => {
+                    is_success = client.rotor_wave_last_reset ();
+                });
+
+                Idle.add (reset_last_wave.callback);
+            });
+
+            yield;
         }
     }
 }

@@ -15,8 +15,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-
-public abstract class Cassette.TrackRow : Reactable {
+public abstract class Cassette.TrackRow: Reactable {
 
     public Client.YaMAPI.Track track_info { get; construct; }
 
@@ -24,31 +23,31 @@ public abstract class Cassette.TrackRow : Reactable {
 
     protected override string css_class_name_hover {
         owned get {
-            return "track-row-hover";
+            return "hover";
         }
     }
 
     protected override string css_class_name_active {
         owned get {
-            return "track-row-active";
+            return "active";
         }
     }
 
     protected override string css_class_name_playing_default {
         owned get {
-            return "track-row-playing";
+            return "playing";
         }
     }
 
     protected override string css_class_name_playing_hover {
         owned get {
-            return "track-row-playing-hover";
+            return "playing-hover";
         }
     }
 
     protected override string css_class_name_playing_active {
         owned get {
-            return "track-row-playing-active";
+            return "playing-active";
         }
     }
 
@@ -56,5 +55,9 @@ public abstract class Cassette.TrackRow : Reactable {
         if (track_info.available) {
             play_mark_track.trigger ();
         }
+    }
+
+    static construct {
+        set_css_name ("track-row");
     }
 }

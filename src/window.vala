@@ -15,14 +15,12 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-
 using Cassette.Client;
 
 [GtkTemplate (ui = "/io/github/Rirusha/Cassette/ui/window.ui")]
 public class Cassette.Window : ApplicationWindow {
 
     const ActionEntry[] ACTION_ENTRIES = {
-        { "welcome", on_welcome_action },
         { "close-sidebar", on_close_sidebar_action },
         { "show-disliked-tracks", on_show_disliked_tracks_action },
         { "preferences", on_preferences_action },
@@ -134,7 +132,7 @@ public class Cassette.Window : ApplicationWindow {
 
         loading_stack.notify["visible-child"].connect (() => {
             if (loading_stack.visible_child_name == "done") {
-                on_welcome_action ();
+                do_welcome.begin ();
 
                 is_ready = true;
             }
@@ -181,16 +179,9 @@ public class Cassette.Window : ApplicationWindow {
         sidebar.close ();
     }
 
-    void on_welcome_action () {
+    async void do_welcome () {
         switch (settings.get_string ("last-version")) {
-            case Config.VERSION:
-                break;
-
-            case "0.0.0":
-                break;
-
             default:
-
                 break;
         }
 

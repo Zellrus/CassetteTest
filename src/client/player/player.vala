@@ -82,6 +82,8 @@ public class Cassette.Client.Player.Player : Object {
                         break;
                 }
 
+                update_player ();
+
                 if (settings.get_boolean ("can-cache")) {
                     cache_next_track ();
                 }
@@ -200,7 +202,7 @@ public class Cassette.Client.Player.Player : Object {
 
     public Mode mode { get; private set; }
 
-    const double PLAY_CALLBACK_STEP = 0.1;
+    const double PLAY_CALLBACK_STEP = 1.0;
 
     string play_id { get; set; default = ""; }
 
@@ -236,25 +238,27 @@ public class Cassette.Client.Player.Player : Object {
         settings.bind ("mute", this, "mute", SettingsBindFlags.DEFAULT);
 
         next_track_loaded.connect (() => {
-            update_can_go ();
+            update_player ();
         });
 
-        mode_inited.connect (update_can_go);
+        mode_inited.connect (update_player);
 
         Timeout.add ((int) (PLAY_CALLBACK_STEP * 1000.0), () => {
-            if (playback_pos_sec > 0.0 && state == State.PLAYING) {
-                playback_callback (playback_pos_sec);
-            }
+            send_callback ();
 
             total_played_seconds += PLAY_CALLBACK_STEP;
-
-            update_can_go ();
 
             return Source.CONTINUE;
         });
     }
 
-    void update_can_go () {
+    void send_callback () {
+        if (playback_pos_sec > 0.0 && state == State.PLAYING) {
+            playback_callback (playback_pos_sec);
+        }
+    }
+
+    void update_player () {
         var cgn = mode.get_next_index (true) != -1 && !current_track_loading;
         var cgp = mode.get_prev_index () != -1 || playback_pos_sec > 3.0 && !current_track_loading;
 
@@ -266,11 +270,15 @@ public class Cassette.Client.Player.Player : Object {
         if (cgp != can_go_prev) {
             can_go_prev = cgp;
         }
+
+        send_callback ();
     }
 
     void reset_play () {
         play_id = Uuid.string_random ();
         total_played_seconds = 0.0;
+
+        update_player ();
     }
 
     void init (string[]? args) {
@@ -282,6 +290,7 @@ public class Cassette.Client.Player.Player : Object {
             ms = 0;
         }
 
+        update_player ();
         playbin.seek_simple (Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, ms * Gst.MSECOND);
     }
 
@@ -295,10 +304,18 @@ public class Cassette.Client.Player.Player : Object {
             repeat_mode = RepeatMode.OFF;
         }
 
+        var flow_queue = new ArrayList<YaMAPI.Track> ();
+
+        foreach (var track_info in queue) {
+            if (!track_info.is_ugc) {
+                flow_queue.add (track_info);
+            }
+        }
+
         var flow = new Flow (
             this,
             station_id,
-            queue
+            flow_queue
         );
 
         mode = flow;
@@ -307,8 +324,11 @@ public class Cassette.Client.Player.Player : Object {
 
         flow.init_async.begin ((obj, res) => {
             if (flow.init_async.end (res)) {
-                start_current_track.begin ();
+                current_track_finish_loading (mode.get_current_track_info ());
+
                 mode_inited ();
+
+                start_current_track.begin ();
             }
         });
     }
@@ -420,9 +440,11 @@ public class Cassette.Client.Player.Player : Object {
 
         mode.next (true);
 
-        start_current_track.begin (() => {
-            ready_play_next ();
-        });
+        if (mode.current_index != -1) {
+            start_current_track.begin (() => {
+                ready_play_next ();
+            });
+        }
     }
 
     public void next () {
@@ -430,9 +452,11 @@ public class Cassette.Client.Player.Player : Object {
 
         mode.next (false);
 
-        start_current_track.begin (() => {
-            ready_play_next ();
-        });
+        if (mode.current_index != -1) {
+            start_current_track.begin (() => {
+                ready_play_next ();
+            });
+        }
     }
 
     public void prev (bool ignore_progress = false) {
@@ -502,7 +526,7 @@ public class Cassette.Client.Player.Player : Object {
             (mode as Flow)?.prepare_next_track ();
         }
 
-        update_can_go ();
+        update_player ();
     }
 
     void cache_next_track () {

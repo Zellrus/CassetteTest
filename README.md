@@ -1,56 +1,52 @@
-<h1 align="center">
-  <img src="data/icons/hicolor/scalable/apps/io.github.Rirusha.Cassette.svg" alt="Cassette"/>
-  <br/>
-  Cassette
-</h1>
+README language: \
+[![En](https://img.shields.io/badge/en-green)](README.md)
+[![Ru](https://img.shields.io/badge/ru-gray)](docs/README-ru.md)
 
-<p align="center">
-  GTK4/Adwaita приложение, которое позволит вам использовать Я.Музыку на Linux.
-</p>
+<div align="center">
+  <h1>
+    <img
+      src="data/icons/hicolor/scalable/apps/space.rirusha.Cassette.svg"
+      height="64"
+    />
+    Cassette
+  </h1>
 
-<br/>
-
-<p align="center">
-  <a href="https://flathub.org/apps/details/io.github.Rirusha.Cassette">
-    <img width="200" src="https://flathub.org/assets/badges/flathub-badge-en.png" alt="Download on Flathub">
-  </a>
-  <br>
-  <br>
   <a href="https://stopthemingmy.app">
     <img src="https://stopthemingmy.app/badge.svg"/>
   </a>
-  <br>
+
   <a href="https://t.me/CassetteGNOME_Devlog">
-    <img alt="tg" src="https://img.shields.io/badge/Telegram-Channel-blue?style=flat&logo=telegram&label=%20&labelColor=blue">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Channel-blue?style=flat&logo=telegram">
   </a>
-  <br>
-  <a href="https://t.me/CassetteGNOME_Discussion">
-    <img alt="tg" src="https://img.shields.io/badge/Telegram-Chat-blue?style=flat&logo=telegram&label=%20&labelColor=blue">
+
+  <a href="https://t.me/CassetteGNOME_Devlog">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Chat-blue?style=flat&logo=telegram">
   </a>
-</p>
+</div>
 
-<p align="center">
-    <img src="data/images/1-liked.png" alt="Screenshot"/>
-</p>
+<div align="center"><h4>GTK4/Adwaita application that allows you to use Yandex Music service on Linux operating systems.</h4></div>
 
+<div align="center">
+  <img src="data/images/1-liked-view.png" alt="Preview"/>
+</div>
 
-## План основных версий
-[![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/Rirusha/Cassette/2?label=0.2.0%20-%20%D0%9C%D0%BE%D1%8F%20%D0%B2%D0%BE%D0%BB%D0%BD%D0%B0)](https://github.com/Rirusha/Cassette/milestone/2) \
-[![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/Rirusha/Cassette/5?label=0.2.1%20-%20%D0%A3%D0%BB%D1%83%D1%87%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D1%8D%D0%BA%D0%B5%D0%BD%D0%B4%D0%B0%20%D0%B8%20%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F)](https://github.com/Rirusha/Cassette/milestone/5) \
-[![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/Rirusha/Cassette/4?label=0.2.2%20-%20%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D0%BD%D0%B0%D0%B4%20%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C%D1%8E)](https://github.com/Rirusha/Cassette/milestone/4) \
-[![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/Rirusha/Cassette/6?label=0.3.0%20-%20%D0%9F%D0%BE%D0%BA%D0%B0%D0%B7%20%D0%B0%D0%BB%D1%8C%D0%B1%D0%BE%D0%BC%D0%BE%D0%B2%20%D0%B8%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D0%B5%D0%B9)](https://github.com/Rirusha/Cassette/milestone/6) \
-[![GitHub milestone details](https://img.shields.io/github/milestones/progress-percent/Rirusha/Cassette/7?label=0.4.0%20-%20%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0%20%D0%BF%D0%BE%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%83)](https://github.com/Rirusha/Cassette/milestone/7)
+## Install
 
-Все запланированные фичи можете [посмотреть в бэклоге](https://github.com/users/Rirusha/projects/2)
+**Flathub:**
 
+<a href="https://flathub.org/apps/details/space.rirusha.Cassette">
+  <img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/>
+</a>
 
-## Установка из репозитория
+```shell
+flatpak install space.rirusha.Cassette
+```
 
-Приложение Cassette доступно здесь:
+**Distribution repositories:**
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/cassette.svg)](https://repology.org/project/cassette/versions)
 
-### ALT Sisyphus
+### ALT Linux
 ```shell
 su -
 apt-get install cassette
@@ -58,8 +54,7 @@ apt-get install cassette
 
 ### Arch Linux
 
-> [!NOTE]
-> Большинство AUR Helper'ов поддерживает Pacman-style флаги, например, yay.
+> Most AUR Helpers support Pacman-style flags, for example, yay.
 
 #### yay
 ```shell
@@ -71,66 +66,15 @@ yay -S cassette
 pamac install cassette
 ```
 
-
-## Установка c помощью Flatpak
-
-Вы можете скачать по [ссылке](https://flathub.org/apps/details/io.github.Rirusha.Cassette) или используя терминал
-
+### NixOS Unstable	
 ```shell
-flatpak install io.github.Rirusha.Cassette
+nix-shell -p cassette
 ```
 
+## Building
 
-## Nightly версия
+#### Dependencies:
 
-> [!WARNING]
-> Данная версия собирается и обновляется при каждом изменение в коде, поэтому может оказаться нестабильной.
-
-### Flatpak
-
-#### Подключаем репозиторий `gnome-nightly` и устанавливаем GNOME Platform:
-```shell
-flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
-flatpak install gnome-nightly org.gnome.Platform//master
-```
-
-#### Подключаем Nightly репозиторий и устанавливаем приложение:
-```shell
-flatpak remote-add --if-not-exists cassette-nightly https://rirusha.github.io/Cassette/index.flatpakrepo
-flatpak install cassette-nightly io.github.Rirusha.Cassette-Devel
-```
-
-#### Для удаления репозитория нужно выполнить:
-```shell
-flatpak remote-delete cassette-nightly
-```
-
-### Arch Linux
-
-> [!NOTE]
-> При необходимости, в arch-подобных системах можно установить Nightly версию из репозитория AUR. 
-> По возможности рекомендуется использовать Flatpak версию.
->
-> Большинство AUR Helper'ов поддерживает Pacman-style флаги, например, yay.
-
-#### yay
-```shell
-yay -S cassette-git
-```
-
-#### pamac
-```shell
-pamac install cassette-git
-```
-
-## Установка в Windows
-
-Способы установки приложения в Windows описаны [здесь](docs/INSTALLATION_ON_WINDOWS.md).
-
-
-## Сборка из исходного кода
-
-#### Зависимости:
 * `gtk4`, version: `>= 4.14`
 * `libadwaita-1`, version: `>= 1.5`
 * `libsoup-3.0`
@@ -142,9 +86,10 @@ pamac install cassette-git
 * `gstreamer-1.0`
 * `webkitgtk-6.0`
 * `gio-2.0`, version: `>= 2.72`
-* `git`, только для `devel`
+* `git`, only for `devel`
 
-#### Утилиты для сборки:
+#### Building utilities:
+
 * `meson`
 * `ninja`
 * `cmake`
@@ -154,92 +99,96 @@ pamac install cassette-git
 * `pkg`
 * `appstream-utils`
 
-### Сборка:
+### PreRelease
 
-#### latest
-> [!NOTE]
-> В данной версии будут недоступны нестабильные функции, находящиеся в разработке.
+> Unstable features under development will not be available in this version.
 ```shell
-meson setup builddir
+meson setup _build
 ```
 
-#### devel
-> [!WARNING]
-> В данной версии будут доступны все devel функции, приложение может работать нестабильно.
+### `is_devel` flag
+
+> In this version, all devel functions will be available.
 ```shell
-meson setup builddir
-meson configure -Dprofile=development builddir
+meson setup _build -Dis_devel=true
 ```
 
-### Тестирование
+#### Install
 ```shell
-ninja -C builddir test
+sudo ninja install -C _build
 ```
 
-### Установка:
+#### Testing
 ```shell
-sudo ninja -C builddir install
+ninja -C _build test
 ```
 
-### Удаление:
+#### Uninstal
 ```shell
-sudo ninja -C builddir uninstall
+sudo ninja uninstall -C _build
 ```
 
+## Devel version
 
-## Решение проблем
+> This version is built and updated with every commit, so it may be unstable.
 
-Решение известных проблем описано на странице Cassette на [ALT Gnome Wiki](https://alt-gnome.wiki/cassette.html#решение-проблем).
+You need to add `cassette-nightly` and `gnome-nightly` repositories:
 
-Также загляните во вкладку [issues](https://github.com/Rirusha/Cassette/issues), если вашей проблемы нет и там, расскажите о ней, заведя новый [issue](https://github.com/Rirusha/Cassette/issues/new).
+```shell
+flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
+flatpak remote-add --if-not-exists cassette-nightly https://rirusha.space/repos/cassette-nightly.flatpakrepo
+```
 
+Install application:
 
-## Для разработчиков
+```shell
+flatpak install cassette-nightly space.rirusha.Cassette.Devel
+```
 
-### Использование Visual Studio Code
-Репозиторий имеет рекомендуемые расширения для проверки и запуска приложения с gdb.
+## For developers
 
-### Зависимости
+> The repository has recommended extensions for developing with Visual Studio Code.
 
-#### репозиторий [gnome-nightly](https://wiki.gnome.org/Apps/Nightly):
+### Dependencies
+
+#### repository [gnome-nightly](https://wiki.gnome.org/Apps/Nightly):
 ```shell
 flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
 ```
 
-#### Для запуска
+#### To run
 `org.gnome.Platform//master`
 ```shell
 flatpak install org.gnome.Platform//master
 ```
 
-#### Для сборки
+#### To build
 `org.gnome.Sdk//master` \
 `org.freedesktop.Sdk.Extension.vala//23.08beta`
 ```shell
 flatpak install org.gnome.Sdk//master org.freedesktop.Sdk.Extension.vala//23.08beta
 ```
 
+## Support
 
-## Поддержка
-Вы можете поддержать несколькими способами:
-- Создать ишью с проблемой или предложением по улучшению
-- Отправить pull request с фиксом или добавлением функционала
-- Поддержать рублём (Просьба указывать в "Сообщении получателю" свой никнейм при отправлении через Тинькофф):
+You can support in several ways:
+- Create an issue with a problem or a suggestion for improvement
+- Submit a merge request with a fix or new functionality
+- Support financially (Please include your nickname in the "Message to the recipient" when sending via T-Bank)
 
-  <p>
-    <a href="https://www.tinkoff.ru/cf/21GCxLuFuE9">
-      <img height="36" src="https://github.com/Rirusha/Cassette/assets/95986183/87496207-aa1c-40fc-a511-57bac188bc72" alt="Tinkoff">
-    </a>
-  </p>
-  <p>
-    <a href="https://boosty.to/rirusha/donate">
-      <img height="36" src="https://github.com/Rirusha/Cassette/assets/95986183/313ee5af-d374-4f95-af62-9445d1c27347" alt="boosty.to">
-    </a>
-  </p>
+<br>
 
+<div align="center">
+  <a href="https://www.tbank.ru/cf/21GCxLuFuE9" style="margin-right: 100px;">
+    <img height="200" src="assets/tbank.png" alt="Tinkoff">
+  </a>
+  <a href="https://boosty.to/rirusha/donate">
+    <img height="200" src="assets/boosty.png" alt="boosty.to">
+  </a>
+</div>
 
-## Благодарность
-Спасибо [MarshalX](https://github.com/MarshalX). Библиотека [yandex-music-api](https://github.com/MarshalX/yandex-music-api) была использована в качестве документации к api.
+## Gratitude
+Thank you [MarshalX](https://github.com/MarshalX ). The [yandex-music-api](https://github.com/MarshalX/yandex-music-api) library was used as api documentation.
 
-> [!NOTE]
-Cassette - неофициальный клиент, не связан с компанией Яндекс и не одобрен ей.
+> Attention!
+> Cassette is an unofficial client, not affiliated with Yandex and not approved by it.

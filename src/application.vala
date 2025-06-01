@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 using Cassette.Client;
@@ -54,6 +55,7 @@ namespace Cassette {
             { "parse-url", on_parse_url_action },
             { "open-account", on_open_account_action },
             { "open-plus", on_open_plus_action },
+            { "get-plus", on_get_plus_action },
             { "mute", on_mute_action },
         };
 
@@ -90,14 +92,14 @@ namespace Cassette {
 
         public bool is_devel {
             get {
-                return Config.PROFILE == "Devel";
+                return Config.IS_DEVEL;
             }
         }
 
         public Application () {
             Object (
                 application_id: Config.APP_ID_DYN,
-                resource_base_path: "/io/github/Rirusha/Cassette/",
+                resource_base_path: "/space/rirusha/Cassette/",
                 flags: ApplicationFlags.DEFAULT_FLAGS | ApplicationFlags.HANDLES_OPEN
             );
         }
@@ -105,7 +107,7 @@ namespace Cassette {
         construct {
             application = this;
 
-            settings = new Settings ("io.github.Rirusha.Cassette.application");
+            settings = new Settings ("space.rirusha.Cassette.application");
 
             Cassette.Client.init (is_devel);
 
@@ -437,21 +439,15 @@ namespace Cassette {
         }
 
         void on_open_account_action () {
-            try {
-                Process.spawn_command_line_async ("xdg-open https://id.yandex.ru/");
-
-            } catch (SpawnError e) {
-                Logger.warning (_("Error while opening uri: %s").printf (e.message));
-            }
+            new Gtk.UriLauncher ("https://id.yandex.ru/").launch.begin (null, null);
         }
 
         void on_open_plus_action () {
-            try {
-                Process.spawn_command_line_async ("xdg-open https://plus.yandex.ru/");
+            new Gtk.UriLauncher ("https://plus.yandex.ru/").launch.begin (null, null);
+        }
 
-            } catch (SpawnError e) {
-                Logger.warning (_("Error while opening uri: %s").printf (e.message));
-            }
+        void on_get_plus_action () {
+            new Gtk.UriLauncher ("https://plus.yandex.ru/getplus/").launch.begin (null, null);
         }
 
         void on_mute_action () {

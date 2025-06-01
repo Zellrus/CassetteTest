@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 
@@ -47,8 +48,8 @@ static void on_bus_aquired (DBusConnection con, string name) {
 public class Mpris : Object {
     public bool can_quit { get; set; default = true; }
     public bool can_raise { get; set; default = true; }
-    public string desktop_entry { get; set; default = Config.APP_ID_DYN; }
-    public string identity { get; set; default = Config.APP_IDENTITY_DYN; }
+    public string desktop_entry { get; set; default = "%s.desktop".printf (Config.APP_ID_DYN); }
+    public string identity { get; set; default = Config.APP_NAME; }
 
     public signal void quit_triggered ();
     public signal void raise_triggered ();
@@ -248,13 +249,13 @@ public class MprisPlayer : Object {
 
         var current_track = player.mode.get_current_track_info ();
         if (current_track == null) {
-            metadata.insert ("mpris:trackid", new ObjectPath ("/io/github/Rirusha/Cassette/Track/0"));
+            metadata.insert ("mpris:trackid", new ObjectPath ("/space/rirusha/Cassette/Track/0"));
         } else {
             ObjectPath obj_path;
             if ("-" in current_track.id) {
-                obj_path = new ObjectPath (@"/io/github/Rirusha/Cassette/Track/$(current_track.id.hash ())");
+                obj_path = new ObjectPath (@"/space/rirusha/Cassette/Track/$(current_track.id.hash ())");
             } else {
-                obj_path = new ObjectPath (@"/io/github/Rirusha/Cassette/Track/$(current_track.id)");
+                obj_path = new ObjectPath (@"/space/rirusha/Cassette/Track/$(current_track.id)");
             }
 
             string[] artists = new string [current_track.artists.size];

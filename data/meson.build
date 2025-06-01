@@ -1,5 +1,11 @@
+desktop_conf = configuration_data()
+desktop_conf.set('APP_ID_DYN', app_id_dyn)
+
 desktop_file = i18n.merge_file(
-  input: '@0@.desktop.in'.format(app_id_dyn),
+  input: configure_file(
+    output: '@0@.desktop.in'.format(app_id_dyn),
+    input: '@0@.desktop.in.in'.format(app_id_dyn),
+    configuration: desktop_conf),
   output: '@0@.desktop'.format(app_id_dyn),
   type: 'desktop',
   po_dir: '../po',
@@ -12,12 +18,22 @@ if desktop_utils.found()
   test('Validate desktop file', desktop_utils, args: [desktop_file])
 endif
 
+appstream_conf = configuration_data()
+appstream_conf.set('APP_ID', app_id)
+appstream_conf.set('APP_ID_DYN', app_id_dyn)
+appstream_conf.set('HOMEPAGE', 'https://gitlab.gnome.org/Rirusha/Cassette')
+appstream_conf.set('BUGTRACKER', 'https://gitlab.gnome.org/Rirusha/Cassette/-/issues')
+appstream_conf.set('HELP', 'https://t.me/CassetteGNOME_Discussion')
+
 appstream_file = i18n.merge_file(
-  input: '@0@.appdata.xml.in'.format(app_id),
-  output: '@0@.appdata.xml'.format(app_id),
+  input: configure_file(
+    output: '@0@.metainfo.xml.in'.format(app_id),
+    input: '@0@.metainfo.xml.in.in'.format(app_id),
+    configuration: appstream_conf),
+  output: '@0@.metainfo.xml'.format(app_id),
   po_dir: '../po',
   install: true,
-  install_dir: join_paths(get_option('datadir'), 'appdata')
+  install_dir: join_paths(get_option('datadir'), 'metainfo')
 )
 
 appstreamcli = find_program('appstreamcli', required: false)
@@ -77,6 +93,7 @@ resource_files = files('@0@.gresource.xml'.format(app_id))
 resources = gnome.compile_resources(
   'cassette-resources',
   resource_files,
+  source_dir: meson.current_build_dir(),
   dependencies: blueprints,
   c_name: 'cassette'
 )

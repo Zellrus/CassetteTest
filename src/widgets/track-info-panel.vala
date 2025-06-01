@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,12 +13,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 using Cassette.Client;
 
-[GtkTemplate (ui = "/io/github/Rirusha/Cassette/ui/track-info-panel.ui")]
+[GtkTemplate (ui = "/space/rirusha/Cassette/ui/track-info-panel.ui")]
 public class Cassette.TrackInfoPanel : Adw.Bin, Gtk.Orientable {
 
     [GtkChild]
@@ -80,6 +81,8 @@ public class Cassette.TrackInfoPanel : Adw.Bin, Gtk.Orientable {
 
                 play_mark_track.init_content (value.id);
             }
+
+            update_labels_visibility ();
         }
     }
 
@@ -211,17 +214,14 @@ public class Cassette.TrackInfoPanel : Adw.Bin, Gtk.Orientable {
     }
 
     construct {
-        track_version_label.notify["label"].connect (() => {
-            track_version_label.visible = track_version_label.label != "";
-        });
-
-        track_authors_label.notify["label"].connect (() => {
-            track_authors_label.visible = track_authors_label.label != "";
-        });
-
         notify["position"].connect (() => {
             position_label.label = position.to_string ();
         });
+    }
+
+    void update_labels_visibility () {
+        track_version_label.visible = track_version_label.label != "";
+        track_authors_label.visible = track_authors_label.label != "";
     }
 
     public PlayMarkTrack get_play_mark_track () {

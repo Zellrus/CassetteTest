@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 
@@ -20,7 +21,7 @@ using Cassette.Client;
 
 
 namespace Cassette {
-    [GtkTemplate (ui = "/io/github/Rirusha/Cassette/ui/playlist-view.ui")]
+    [GtkTemplate (ui = "/space/rirusha/Cassette/ui/playlist-view.ui")]
     public class PlaylistView : CachiableView {
         [GtkChild]
         unowned SaveStack save_stack;
@@ -241,12 +242,16 @@ namespace Cassette {
                     playlist_status.label = _("Owner: %s").printf (playlist_info.owner.name);
                 }
             } else {
-                // Translators: 0 - female, 1 - male (different gender endings)
-                string format_string = ngettext (
-                    "%s updated playlist %s",
-                    "%s updated playlist %s",
-                    playlist_info.owner.sex == "female"? 0 : 1
-                );
+                string format_string;
+                if (playlist_info.owner.sex == "female") {
+                    // Translators: %s is female person
+                    format_string = C_ ("female person", "%s updated playlist %s");
+
+                } else {
+                    // Translators: %s is male person
+                    format_string = C_ ("male person", "%s updated playlist %s");
+                }
+
                 playlist_status.label = format_string.printf (playlist_info.owner.name, get_when (playlist_info.modified));
             }
 

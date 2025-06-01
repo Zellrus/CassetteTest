@@ -1,4 +1,4 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 using Gee;

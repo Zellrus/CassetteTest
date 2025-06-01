@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,13 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 
 using Cassette.Client;
 
-[GtkTemplate (ui = "/io/github/Rirusha/Cassette/ui/stations-view.ui")]
+[GtkTemplate (ui = "/space/rirusha/Cassette/ui/stations-view.ui")]
 public class Cassette.StationsView : BaseView {
 
     [GtkChild]
@@ -140,6 +141,27 @@ public class Cassette.StationsView : BaseView {
         }
 
         show_ready ();
+
+        //  Magicaly fix it https://t.me/RiruAndFriends/49936
+        Idle.add_once (() => {
+            dashboard_flow_box.homogeneous = false;
+            genre_flow_box.homogeneous = false;
+            mood_flow_box.homogeneous = false;
+            activity_flow_box.homogeneous = false;
+            epoch_flow_box.homogeneous = false;
+            other_flow_box.homogeneous = false;
+            search_flow_box.homogeneous = false;
+        });
+
+        Idle.add_once (() => {
+            dashboard_flow_box.homogeneous = true;
+            genre_flow_box.homogeneous = true;
+            mood_flow_box.homogeneous = true;
+            activity_flow_box.homogeneous = true;
+            epoch_flow_box.homogeneous = true;
+            other_flow_box.homogeneous = true;
+            search_flow_box.homogeneous = true;
+        });
     }
 
     public async override int try_load_from_web () {

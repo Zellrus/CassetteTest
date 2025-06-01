@@ -1,16 +1,16 @@
 project(
   'cassette',
   ['c', 'vala'],
-  version: '0.2.0',
-  meson_version: '>= 0.62.0',
-  license: 'GPL-3.0-only',
+  version: '0.2.1',
+  meson_version: '>= 1.0.0',
+  license: 'GPL-3.0-or-later',
 )
 
 i18n = import('i18n')
 gnome = import('gnome')
 
-gtk = dependency('gtk4', version: '>= 4.14')
-libadwaita = dependency('libadwaita-1', version: '>= 1.5')
+gtk = dependency('gtk4', version: '>= 4.15')
+libadwaita = dependency('libadwaita-1', version: '>= 1.6')
 threads = dependency('threads')
 libsoup = dependency('libsoup-3.0')
 gdkpixbuf = dependency('gdk-pixbuf-2.0')
@@ -22,35 +22,37 @@ gstreamer = dependency('gstreamer-1.0')
 webkit = dependency('webkitgtk-6.0')
 gio = dependency('gio-2.0', version: '>= 2.72')
 
-app_id = 'io.github.Rirusha.Cassette'
+app_id = 'space.rirusha.Cassette'
 
-if get_option('profile') == 'development'
+name_suffix = ''
+version_suffix = ''
+app_id_suffix = ''
+
+if get_option('is_devel')
+  name_suffix = ' (Devel)'
+  app_id_suffix = '.Devel'
+
   find_program('git', required: true)
-  name_postfix = ' (Devel)'
-  app_id_dyn = '@0@-Devel'.format(app_id)
-  app_identity_dyn = 'Cassette (Devel)'
-  profile = 'Devel'
-  vcs_tag = run_command('git', 'rev-parse', '--short', 'HEAD').stdout().strip()
+  vcs_tag = run_command('git', 'rev-parse', '--short', 'HEAD', check: true).stdout().strip()
   version_suffix = '-dev.@0@'.format (vcs_tag)
-else
-  name_postfix = ''
-  app_id_dyn = app_id
-  app_identity_dyn = 'Cassette'
-  profile = ''
-  version_suffix = ''
 endif
+
+app_id_dyn = '@0@@1@'.format (app_id, app_id_suffix)
+app_name = 'Cassette@0@'.format (name_suffix)
 
 conf = configuration_data()
 conf.set_quoted('APP_ID', app_id)
-conf.set_quoted('APP_NAME', 'Cassette@0@'.format (name_postfix))
 conf.set_quoted('APP_ID_DYN', app_id_dyn)
-conf.set_quoted('APP_IDENTITY_DYN', app_identity_dyn)
+conf.set_quoted('APP_NAME', app_name)
 conf.set_quoted('G_LOG_DOMAIN', app_id)
-conf.set_quoted('PROFILE', profile)
-conf.set_quoted('VERSION', meson.project_version() + version_suffix)
+conf.set10('IS_DEVEL', get_option('is_devel'))
+conf.set_quoted('VERSION', '@0@@1@'.format (meson.project_version(), version_suffix))
 conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
 conf.set_quoted('DATADIR', join_paths(get_option('prefix'), get_option('datadir')))
 conf.set_quoted('GNOMELOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
+conf.set_quoted('HOMEPAGE', 'https://gitlab.gnome.org/Rirusha/Cassette')
+conf.set_quoted('BUGTRACKER', 'https://gitlab.gnome.org/Rirusha/Cassette/-/issues')
+conf.set_quoted('HELP', 'https://t.me/CassetteGNOME_Discussion')
 
 subdir('data')
 

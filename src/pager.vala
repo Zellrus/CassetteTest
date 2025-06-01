@@ -1,8 +1,9 @@
-/* Copyright 2023-2024 Rirusha
+/* Copyright 2023-2024 Vladimir Vaskov
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 
@@ -104,7 +105,7 @@ namespace Cassette {
         }
 
         construct {
-            pages_file = File.new_build_filename (storager.cache_dir_file.peek_path (), "cassette.pages");
+            pages_file = File.new_build_filename (storager.data_dir_file.peek_path (), "cassette.pages");
 
             // Type register
             typeof (PlaylistView).ensure ();
@@ -265,7 +266,7 @@ namespace Cassette {
                 add_page ({
                     "main",
                     _("Main"),
-                    "go-home-symbolic",
+                    "user-home-symbolic",
                     typeof (MainView).name ()
                 });
             }
@@ -308,7 +309,7 @@ namespace Cassette {
                 }
 
             } catch (Error e) {
-                Logger.warning (_("Can't read pages file. Messsage: %s").printf (e.message));
+                Logger.warning (_("Can't read pages file. Message: %s").printf (e.message));
             }
         }
 
@@ -328,7 +329,7 @@ namespace Cassette {
                 FileUtils.set_contents (pages_file.peek_path (), content_str, content_str.length);
 
             } catch (Error e) {
-                Logger.warning (_("Can't create pages file. Messsage: %s").printf (e.message));
+                Logger.warning (_("Can't create pages file. Message: %s").printf (e.message));
             }
         }
 
